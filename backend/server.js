@@ -7,8 +7,8 @@ import userRoutes from "./routes/user.routes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 import { connectDB } from "./db/connectDB.js";
 import cookieParser from "cookie-parser";
+import { app, server } from "./socket/socket.js";
 
-const app = express();
 const port = process.env.PORT || 5001;
 
 dotenv.config();
@@ -28,7 +28,7 @@ app.use("/api/users", userRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
-app.listen(port, () => {
+server.listen(port, () => {
   connectDB();
   console.log(`Server running on port ${port}`);
 });
